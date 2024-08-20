@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container img {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 48%;
+            background-color: #4CAF50; /* Green for both buttons initially */
+            color: white;
+        }
+        .form-container button[disabled] {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+        .message {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .loading {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function clearFields() {
+            document.getElementById('student_name').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('marks').value = '';
+            document.getElementById('message').innerHTML = '';
+            document.getElementById('message').className = 'message'; // Reset the class to remove any background color
+        }
+
+        function onSubmitForm() {
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('refreshBtn').disabled = true;
+            document.getElementById('loadingMessage').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Submit Student Marks</h2>
+        <img src="/static/books.png" alt="Sample Image" />
+        <form method="post" onsubmit="onSubmitForm()">
+            <label for="student_name">Student Name:</label>
+            <input type="text" id="student_name" name="student_name" required>
+
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+
+            <label for="marks">Marks:</label>
+            <input type="number" id="marks" name="marks" required>
+
+            <div class="form-buttons">
+                <button type="submit" id="submitBtn">Submit</button>
+                <button type="button" id="refreshBtn" onclick="clearFields()">Refresh</button>
+            </div>
+            <div id="loadingMessage" class="loading" style="display: none;">Submitting, please wait...</div>
+        </form>
+        <div id="message" class="message {{ status }}">
+            {{ message }}
+        </div>
+    </div>
+</body>
+</html>
