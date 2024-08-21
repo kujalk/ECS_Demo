@@ -1,7 +1,7 @@
 ## Pre-requisites
-Install aws cli
-Install docker
-DynamoDB - Create a new table with name=students_marks_sheet , partiton_key=student_name and sort_key=marks
+- Install aws cli
+- Install docker
+- DynamoDB - Create a new table with name=students_marks_sheet , partiton_key=student_name and sort_key=marks
 
 ## To configure new profile
 aws configure --profile test01
@@ -25,5 +25,5 @@ docker run -d -p 80:80 -e table_name=students_marks_sheet -e region=ap-southeast
 http://127.0.0.1/
 
 ## Tag image and push
-docker tag students_marks:latest 211125477393.dkr.ecr.ap-southeast-1.amazonaws.com/students_marks:latest
-docker push 211125477393.dkr.ecr.ap-southeast-1.amazonaws.com/students_marks:latest
+docker tag students_marks:latest <ecr url>
+docker push <ecr url>
